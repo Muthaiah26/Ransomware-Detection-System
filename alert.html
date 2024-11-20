@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ransomware Detection Dashboard</title>
+    <style>
+        body { 
+            font-family: Arial, sans-serif;
+         }
+        #alerts {
+             list-style-type: none; padding: 0;
+         }
+        li {
+             margin: 5px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>Ransomware Detection Alerts</h1>
+    <ul id="alerts"></ul>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        const socket = io();
+        const alertsContainer = document.getElementById('alerts');
+
+        socket.on('alert', (message) => {
+            const listItem = document.createElement('li');
+            listItem.textContent = message;
+            alertsContainer.appendChild(listItem);
+        });
+    </script>
+</body>
+</html>
